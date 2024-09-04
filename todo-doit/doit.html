@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      #container {
+        width: 500px;
+        margin: 0 auto;
+      }
+
+      header {
+        background-color: #ccc;
+        padding: 10px;
+      }
+
+      #todo-list {
+        list-style-type: none;
+      }
+
+      #todo-list li {
+        border-bottom: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <h1>Todo List</h1>
+      </header>
+      <section>
+        <ul id="todo-list"></ul>
+      </section>
+      <footer>
+        <input type="text" id="input-task" placeholder="할 일을 입력하세요." />
+        <button id="btn-add">추가</button>
+      </footer>
+    </div>
+    <script>
+      function 투두입력받아서추가하기() {
+        // 사용자로부터 입력 받은 내용을 변수에 저장
+        const todoText = document.querySelector("#input-task").value;
+        // 입력 받은 내용을 li 태그로 감싸 HTML 문자열을 생성하는 변수에 저장
+        const newLiText = "<li>" + todoText + "</li>";
+        // #todo-list라는 선택자에 해당되는 것을 선택하여 변수에 저장
+        const selectedUl = document.querySelector("#todo-list");
+        if (selectedUl.childElementCount < 1) {
+          selectedUl.innerText = "";
+        }
+        console.log(selectedUl.childElementCount);
+        if (todoText !== "") {
+          // #todo-list라는 선택자에 해당한 요소의 기존 내용 끝에 새로운 li 태그를 추가
+          selectedUl.innerHTML += newLiText;
+          // #input-task라는 선택자의 값을 빈 문자열로 변경
+          document.querySelector("#input-task").value = "";
+        } else {
+          alert("내용이 없다");
+        }
+
+        // document.querySelector("#todo-list > li").innerText = prompt();
+      }
+      // document.querySelector("#todo-list").innerText += "<li>새로추가된li</li>";
+      document
+        .querySelector("#btn-add")
+        .addEventListener("click", 투두입력받아서추가하기);
+      function init() {
+        const todoListUl = document.querySelector("#todo-list");
+
+        // todoList의 자식요소개수가 1개보다 작다면
+        if (todoListUl.childElementCount < 1) {
+          todoListUl.innerText = "할일이 없음";
+          console.log("조건문 내 코드 실행");
+        }
+        console.log(todoListUl.childElementCount);
+      }
+      init();
+    </script>
+  </body>
+</html>
